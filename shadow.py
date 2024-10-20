@@ -2336,7 +2336,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
         norm = mpl.colors.Normalize(vmin=Text, vmax=Tint)
         sm = plt.cm.ScalarMappable(cmap=newcmp, norm=norm) 
         sm.set_array([])
-        plt.colorbar(sm, ticks=np.linspace(Text,Tint, 10+11),label="Temperature [K]",shrink=0.812) 
+        plt.colorbar(sm, ax=plt.gca(), ticks=np.linspace(Text,Tint, 10+11),label="Temperature [K]",shrink=0.812) 
 
     plt.grid(False)
     plt.axis('off')
