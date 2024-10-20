@@ -357,7 +357,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                         R=Rs/2*Vec[:,0]; theta=Vec[:,1]; phi=Vec[:,2];
                         wef=np.zeros((3,1)); WEF=[];
                         dWEF=abs(rf-np.sqrt(R**2+A**2*np.sin(theta)**2)); dwef=min(dWEF);
-                        if (dwef<2.5e2 and (len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0)):#len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0):#(dwef<2.5e2 and len(np.where([rg<ir*Rs for rg in R])[0])==0):
+                        if (dwef<2.5e2 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0):
                             l=np.where(dWEF==dwef)[0][0];
                             wef=BoyerLindquist_bis(R[l],theta[l],phi[l]);
                             wef=np.array([[np.cos(alpha),0,np.sin(alpha)],[0,1,0],[-np.sin(alpha),0,np.cos(alpha)]]).dot(np.array(wef));
@@ -409,7 +409,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                         R=Rs/2*Vec[:,0]; theta=Vec[:,1]; phi=Vec[:,2]; PR=Vec[:,3]; PTH=Vec[:,4];
                         wef=np.zeros((3,1)); WEF=[];
                         dWEF=abs(rf-np.sqrt(R**2+A**2*np.sin(theta)**2)); dwef=min(dWEF);
-                        if (dwef<2.5e2 and (len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0)):#len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0):#(dwef<2.5e2 and len(np.where([rg<ir*Rs for rg in R])[0])==0):
+                        if (dwef<2.5e2 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0):
                             l=np.where(dWEF==dwef)[0][0];
                             wef=BoyerLindquist_bis(R[l],theta[l],phi[l]);
                             wef=np.array([[np.cos(alpha),0,np.sin(alpha)],[0,1,0],[-np.sin(alpha),0,np.cos(alpha)]]).dot(np.array(wef));
@@ -811,7 +811,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                         R=Rs/2*Vec[:,0]; theta=Vec[:,1]; phi=Vec[:,2];
                         wef=np.zeros((3,1)); WEF=[];
                         dWEF=abs(rf-np.sqrt(R**2+A**2*np.sin(theta)**2)); dwef=min(dWEF);
-                        if (dwef<2.5e2 and (len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0)):#len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0):#(dwef<2.5e2 and len(np.where([rg<ir*Rs for rg in R])[0])==0):
+                        if (dwef<2.5e2 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0):
                             l=np.where(dWEF==dwef)[0][0];
                             wef=BoyerLindquist_bis(R[l],theta[l],phi[l]);
                             wef=np.array([[np.cos(alpha),0,np.sin(alpha)],[0,1,0],[-np.sin(alpha),0,np.cos(alpha)]]).dot(np.array(wef));
@@ -855,7 +855,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                         R=Rs/2*Vec[:,0]; theta=Vec[:,1]; phi=Vec[:,2]; PR=Vec[:,3]; PTH=Vec[:,4];
                         wef=np.zeros((3,1)); WEF=[];
                         dWEF=abs(rf-np.sqrt(R**2+A**2*np.sin(theta)**2)); dwef=min(dWEF);
-                        if (dwef<2.5e2 and (len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0)):#len(np.where([abs(phii)>=np.Inf*np.pi for phii in phi])[0])==0):#(dwef<2.5e2 and len(np.where([rg<ir*Rs for rg in R])[0])==0):
+                        if (dwef<2.5e2 and len(np.where([Vec[vv,0]<=1.01*ir for vv in range(N)])[0])==0):
                             l=np.where(dWEF==dwef)[0][0];
                             wef=BoyerLindquist_bis(R[l],theta[l],phi[l]);
                             wef=np.array([[np.cos(alpha),0,np.sin(alpha)],[0,1,0],[-np.sin(alpha),0,np.cos(alpha)]]).dot(np.array(wef));
