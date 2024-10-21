@@ -3,15 +3,20 @@ A Python3 enriched version of the Scilab package knds_orbits_and_shadows
 
     KNDS_ORBITS_AND_SHADOWS-Python3
 
-This is a package for Python 3.10, loaded with Opencv 4.10 and Imageio 2.36, to draw the (animated) shadow of a Kerr--Newman--(anti) de Sitter (KNdS) black hole, possibly equipped with a thin Keplerian accretion disk, radiating as a blackbody. The shadow can be either drawn from any standard image, or only the accretion disk is drawn on a black background.
+This is a package for Python 3.12, loaded with Opencv 4.10 and Imageio 2.36, to draw the (animated) shadow of a Kerr--Newman--(anti) de Sitter (KNdS) black hole, possibly equipped with a thin Keplerian accretion disk, radiating as a blackbody. The shadow can be either drawn from any standard image, or only the accretion disk is drawn on a black background.
 This code also allows to draw (massive or null) orbits in a KNdS space-time, using different integration methods of the geodesic equation.
 
 ---------------------------------------------------------------------------------------------------
 
-First, install Python 3.10 (along with the libraries numpy, scipy, matplotlib, cmath, os, pickle, warnings) and its packages opencv-python 4.10 (https://pypi.org/project/opencv-python/) and imageio 2.36 (https://pypi.org/project/imageio/). The latter package is used to handle create gif files for shadows of black holes.
+The package can be installed from the Pypi repository https://pypi.org/project/knds-orbits-and-shadows/ using the command
+pip install knds_orbits_and_shadows
+
+Alternatively, the present repository can be used for a manual installation with and example:
+
+First, install Python 3.12 (along with the libraries numpy, scipy, matplotlib, cmath, os, pickle, warnings) and its packages opencv-python 4.10 (https://pypi.org/project/opencv-python/) and imageio 2.36 (https://pypi.org/project/imageio/). The latter package is used to handle create gif files for shadows of black holes.
 
 Next, put the content of the present folder anywhere and in the examples.py file, change the first line to match the directory of the files (and images!).
-Execute the file examples.py; it uses all the functions of the programs, so it should be a good indicator of the sanity of the package. It is divided in three parts: the first one tests the orbit and shadow display, the second one creates a file comet.gif depicting an animated orbit and the third one creates a folder figure_gif containing the file figure.gif; this represents the shadow of an RNdS black hole, with a background celestial sphere that moves diagonally. The full execution takes about one minute on a 12-core 2.60 GHz CPU with 16 Go of RAM.
+Execute the file examples.py; it uses all the functions of the programs, so it should be a good indicator of the sanity of the package. It is divided in three parts: the first one tests the orbit and shadow display, the second one creates a file comet.gif depicting an animated orbit and the third one creates a folder figure_gif containing the file figure.gif; this represents the shadow of an RNdS black hole, with a background celestial sphere that moves diagonally. The full execution takes about one minute on a 12-core 2.60 GHz CPU with 16 Go of RAM. The file examples.py can also be used with the pip-installed version, replacing the importation lines 15-17 by 'from knds import orbit, shadow, make_gif, DatFile4gif, make_gif_with_DatFile'.
 
 ---------------------------------------------------------------------------------------------------
 
