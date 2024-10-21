@@ -9,7 +9,7 @@ This code also allows to draw (massive or null) orbits in a KNdS space-time, usi
 ---------------------------------------------------------------------------------------------------
 
 The package can be installed from the Pypi repository https://pypi.org/project/knds-orbits-and-shadows/ using the command
-pip install knds_orbits_and_shadows
+'pip install knds_orbits_and_shadows'
 
 Alternatively, the present repository can be used for a manual installation with and example:
 
