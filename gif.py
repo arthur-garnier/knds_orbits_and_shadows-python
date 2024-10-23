@@ -31,6 +31,7 @@ import imageio
 
 
 def shadow4gif(Lambda,Mass,Kerr,Newman,Image_matrix,Angle):
+    GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12;
     if Kerr!=0: #Carter's equations
         warnings.filterwarnings("ignore");#warnings.filterwarnings("error")
         ##We define the refining parameters for details near the horizon(s)
@@ -39,7 +40,7 @@ def shadow4gif(Lambda,Mass,Kerr,Newman,Image_matrix,Angle):
         N=1500;
         
         if Lambda!=0:
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Angle;
             rq=Newman**2;
             x0=50000; rf=60000;
@@ -190,7 +191,7 @@ def shadow4gif(Lambda,Mass,Kerr,Newman,Image_matrix,Angle):
             
 
         else:
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Angle;
             rq=Newman**2; x0=50000; rf=60000; rs=2; rg=1; a=Kerr; lam=0.8;
 
@@ -346,7 +347,7 @@ def shadow4gif(Lambda,Mass,Kerr,Newman,Image_matrix,Angle):
     else:
         ##Use Weierstrass' analytic method if a=0:
         if Lambda!=0:
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Angle;
             x0=50000; rf=60000; rq=Newman**2; rs=2; rg=1; a=0; lam=0.8;
             
@@ -513,7 +514,7 @@ def shadow4gif(Lambda,Mass,Kerr,Newman,Image_matrix,Angle):
                     
 
         else:
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Angle;# xi=Angle; txi=np.tan(xi);
             x0=50000; rf=60000;
             rq=Newman**2;##Q=Newman*2*Mass*sqrt(%pi*e0*GSI); rq2=Q^2*GSI/(4*%pi*e0*cSI^4); rq=4*rq2/Rs^2;

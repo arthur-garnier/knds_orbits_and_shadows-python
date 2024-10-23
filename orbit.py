@@ -23,9 +23,10 @@ from auxi import *
 
 ##The function that computes the trajectory of a test particle. 
 def orbit(Lambda,Mass,Kerr,Newman,IniConds,Form,Tau,N,Mu,Conserv,e):
+    GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12;
     if Lambda!=0:
         ##Fundamental constants, normalized parameters and initial conditions
-        GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; ##e=0;
+        ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; ##e=0;
         ##Mass=cSI**2*Rs/(2*GSI); J=Kerr*GSI*Mass**2/cSI; a=J/(Mass*cSI);
         Rs=2*GSI*Mass/cSI**2; J=Kerr*GSI*Mass**2/cSI; a=J/(Mass*cSI);
         Q=Newman*2*Mass*np.sqrt(np.pi*e0*GSI*(1-0*Kerr**2)); rq2=Q**2*GSI/(4*np.pi*e0*cSI**4); rq=4*rq2/Rs**2;##WARNING 0*Kerr**2
@@ -297,7 +298,7 @@ def orbit(Lambda,Mass,Kerr,Newman,IniConds,Form,Tau,N,Mu,Conserv,e):
                             
                             
     else:
-        GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; ##e=0;
+        ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; ##e=0;
         ##Mass=cSI**2*Rs/(2*GSI); J=Kerr*GSI*Mass**2/cSI; a=J/(Mass*cSI);
         Rs=2*GSI*Mass/cSI**2; J=Kerr*GSI*Mass**2/cSI; a=J/(Mass*cSI);
         Q=Newman*2*Mass*np.sqrt(np.pi*e0*GSI*(1-0*Kerr**2)); rq2=Q**2*GSI/(4*np.pi*e0*cSI**4); rq=4*rq2/Rs**2;##WARNING 0*Kerr**2
