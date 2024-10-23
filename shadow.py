@@ -26,6 +26,7 @@ from auxi import *
 
 
 def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
+    GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
     if Kerr!=0: #Carter's equations
         warnings.filterwarnings("ignore");#warnings.filterwarnings("error")
         ##We define the refining parameters for details near the horizon(s)
@@ -35,8 +36,8 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
         N=1500;
         ##Here again, distinguish between whether Lambda is zero or not (faster if Lambda=0)
         if Lambda!=0:
-            ##Initialize: unitless initial conditions  parameters (of the black hole  the accretion disk: size  extremal temperatures if input)
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            ##Initialize: unitless initial conditions and parameters (of the black hole and the accretion disk: size and extremal temperatures if input)
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Accretion_data[1];##J=Kerr*GSI*Mass**2/cSI; A=J/(Mass*cSI); alpha=-Accretion_data[1];
             rq=Newman**2;##Q=Newman*2*Mass*np.sqrt(np.pi*e0*GSI); rq2=Q**2*GSI/(4*np.pi*e0*cSI**4); rq=4*rq2/Rs**2;
             x0=50000; sizee=Accretion_data[4]; rint=sizee[0]*Rs; rext=sizee[1]*Rs; rf=60000;
@@ -47,7 +48,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                 T_int=Accretion_data[5]; T_ext=T_int[2]; T_int=T_int[1];
             
             
-            ##Defining the 'ode' functions (distinguishing between rotating  non-rotating black hole)
+            ##Defining the 'ode' functions (distinguishing between rotating and non-rotating black hole)
             if Kerr==0:
                 def Carter_ter(V,tau):
                     r=V[0]; th=V[1]; ph=V[2]; pr=V[3]; pth=V[4];
@@ -87,7 +88,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                 wp=[-1,np.arctan2(w[1],-w[0]),np.pi/2-np.arccos(wrf)];
                 return(wp)
             
-            ##From  to BL coordinates (with velocities)
+            ##From and to BL coordinates (with velocities)
             def BoyerLindquist_bis(R,T,P):
                 BB=[np.sqrt(R**2+A**2)*np.sin(T)*np.cos(P),np.sqrt(R**2+A**2)*np.sin(T)*np.sin(P),R*np.cos(T)];
                 return BB
@@ -104,7 +105,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
             
             Xmax=22983; tau=-2*cSI/Rs*0.00042; dtau=tau/N; 
             
-            ##Accretion_data[0]<2 means that we want the image with accretion disk  otherwise, we just want the accretion disk  no image is required.
+            ##Accretion_data[0]<2 means that we want the image with accretion disk and otherwise, we just want the accretion disk and no image is required.
             if Accretion_data[0]<2:
                 Img=cv.imread(Image);
                 Img=cv.cvtColor(Img,cv.COLOR_BGR2RGB)
@@ -166,7 +167,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
             ##Depending on what kind of accretion is required, we create a function 'accretion_disk'
             ##which computes the color to be attributed to a pixel, taking into account the various effects.
             ##This function is defined at this point so that we don't need to put a selection process for each pixel:
-            ##the color function is chosen once  for all.
+            ##the color function is chosen once and for all.
             if (Accretion_data[2]=="Blackbody" and Accretion_data[3]=="Doppler"):
                 def accretion_disk(V):
                     r=2*V[0]/Rs; th=V[1]; ph=V[2]; rb=np.sqrt(r**2+a**2); Dr=(1-Lambda*r**2/3)*(r**2+a**2)-2*r+rq; S=r**2+a**2*np.cos(th)**2; Dt=1+Lambda*a**2*np.cos(th)**2/3;
@@ -439,7 +440,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                     
                 
             
-                ##In case the inner  outer temperatures are specified (the "Custom" case), we need one more loop on pixels to find the colors of the accretion disk.
+                ##In case the inner and outer temperatures are specified (the "Custom" case), we need one more loop on pixels to find the colors of the accretion disk.
                 if Accretion_data[2]=="Custom":
                     dp_max=max((dop_max.flatten()).tolist())
                     for i in range(Npix):
@@ -503,7 +504,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
             
 
         else:
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Accretion_data[1];##J=Kerr*GSI*Mass**2/cSI; A=J/(Mass*cSI); alpha=-Accretion_data[1];
             rq=Newman**2;##Q=Newman*2*Mass*np.sqrt(np.pi*e0*GSI); rq2=Q**2*GSI/(4*np.pi*e0*cSI**4); rq=4*rq2/Rs**2;
             x0=50000; sizee=Accretion_data[4]; rint=sizee[0]*Rs; rext=sizee[1]*Rs; rf=60000;
@@ -969,7 +970,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
         ##the celestial sphere (or the accretion disk).
         if Lambda!=0:
             ##Initialize contants and some acretion data
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Accretion_data[1]; xi=Accretion_data[1]; txi=np.tan(xi);
             x0=50000; sizee=Accretion_data[4]; rint=sizee[0]*Rs; rext=sizee[1]*Rs; rf=60000; rint_n=2*sizee[0]; rext_n=2*sizee[1];
             rq=Newman**2;##Q=Newman*2*Mass*sqrt(%pi*e0*GSI); rq2=Q^2*GSI/(4*%pi*e0*cSI^4); rq=4*rq2/Rs^2;
@@ -1038,7 +1039,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
             
             Xmax=22983
             
-            ##Accretion_data[0]<2 means that we want the image with accretion disk  otherwise, we just want the accretion disk  no image is required.
+            ##Accretion_data[0]<2 means that we want the image with accretion disk and otherwise, we just want the accretion disk and no image is required.
             if Accretion_data[0]<2:
                 Img=cv.imread(Image);
                 Img=cv.cvtColor(Img,cv.COLOR_BGR2RGB)
@@ -1649,7 +1650,7 @@ def shadow(Lambda,Mass,Kerr,Newman,Image,Accretion_data):
                     
 
         else:
-            c=1; G=1; M=1; GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
+            c=1; G=1; M=1; ##GSI=6.67408e-11; cSI=299792458; e0=8.854187e-12; sb=5.67e-8;
             Rs=2*GSI*Mass/cSI**2; A=Kerr*Rs/2; alpha=-Accretion_data[1]; xi=Accretion_data[1]; txi=np.tan(xi);
             x0=50000; sizee=Accretion_data[4]; rint=sizee[0]*Rs; rext=sizee[1]*Rs; rf=60000; rint_n=2*sizee[0]; rext_n=2*sizee[1];
             rq=Newman**2;##Q=Newman*2*Mass*sqrt(%pi*e0*GSI); rq2=Q^2*GSI/(4*%pi*e0*cSI^4); rq=4*rq2/Rs^2;

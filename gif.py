@@ -20,7 +20,8 @@ from matplotlib.colors import ListedColormap
 import cv2 as cv
 
 import os
-path0='.';
+path0=os.getcwd();
+os.chdir(path0);
 import warnings
 
 import pickle
@@ -733,13 +734,11 @@ def DatFile4gif(Resol,Lambda,Mass,Kerr,Newman,Angle):
     except Exception as e:
         print(f"An error occurred: {e}")
     os.chdir(path)
-    path="./file"+"_"+str(Resol)+"_"+str(Lambda)+"_"+str(Mass)+"_"+str(Kerr)+"_"+str(Newman)+"_"+str(Angle)+".dat";
+    path=path+"/file"+"_"+str(Resol)+"_"+str(Lambda)+"_"+str(Mass)+"_"+str(Kerr)+"_"+str(Newman)+"_"+str(Angle)+".dat";
 
     with open(path, 'wb') as f:
         pickle.dump([Ns,Ls,Lambda,Mass,Kerr,Newman,img1,img2], f, protocol=-1)
         f.close()
-    
-    os.chdir('../')
 
 
 
@@ -750,6 +749,7 @@ def DatFile4gif(Resol,Lambda,Mass,Kerr,Newman,Angle):
 
 
 def make_gif_with_DatFile(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,Mass,Kerr,Newman,Angle):
+    os.chdir(path0)
     N1=Resol[0]; N2=Resol[1]; K1=Shifts[0]; K2=Shifts[1]; coe=Shifts[2]; Ns=[N1,N2];
     img=cv.imread(Image); img=cv.cvtColor(img,cv.COLOR_BGR2RGB); img=img/256;
     N0=int(np.floor((np.shape(img)[0]-N1)/2)); names=[]; name0=Name; ext=".png"
@@ -773,7 +773,7 @@ def make_gif_with_DatFile(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,M
         else:
             names.append(name0+str(j)+ext)
     os.chdir(path)
-    path=os.getcwd()+"/temp"
+    path=path+"/temp"
     try:
         os.mkdir(path)
         #print(f"Directory '{path}' created successfully.")
@@ -810,13 +810,14 @@ def make_gif_with_DatFile(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,M
         img0.astype(int)
         cv.imwrite(names[i0],img0)
     
-    file="../../dat_files/file"+"_"+str(Resol)+"_"+str(Lambda)+"_"+str(Mass)+"_"+str(Kerr)+"_"+str(Newman)+"_"+str(Angle)+".dat";
+    file=path0+"/dat_files/file"+"_"+str(Resol)+"_"+str(Lambda)+"_"+str(Mass)+"_"+str(Kerr)+"_"+str(Newman)+"_"+str(Angle)+".dat";
 
     try:
         with open(file,'rb') as f:
             [Ns,Ls,Lambda,Mass,Kerr,Newman,img1,img2] = pickle.load(f)
             f.close()
         
+        os.chdir(path)
         Imgs0=os.listdir(); Imgs0.sort(); Imgs=list([]); L=0;
         img=cv.imread(Imgs0[0]); N1=np.shape(img)[0]; N2=np.shape(img)[1];
         L=Ls[2] 
@@ -844,21 +845,23 @@ def make_gif_with_DatFile(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,M
         for img in Imgs0:
             os.remove(img)
         
-        os.chdir('../')
-        os.rmdir("temp")
+        path=path0+'/'+Name+'_gif';
+        os.chdir(path)
+        os.rmdir(path+"/temp")
         for img in range(len(Imgs)):
             name=names[img]; img=Imgs[img];
             img*=256
             img.astype(int)
             cv.imwrite(name,img)
             
+        #imageio.mimsave(Name+'.gif', names, loop=0, duration = 0.1)
+        #for name in names:
+        #    os.remove(name)
         with imageio.get_writer(Name+'.gif', mode='I',fps=FPS,loop=0) as writer:
             for name in names:
                 image = imageio.imread(name)
                 writer.append_data(image)
                 os.remove(name)
-        
-        os.chdir('../')
                 
     except Exception as e:
         print(f"Error: exception {e}.")    
@@ -872,6 +875,7 @@ def make_gif_with_DatFile(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,M
 
 def make_gif(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,Mass,Kerr,Newman,Angle):
     N1=Resol[0]; N2=Resol[1]; K1=Shifts[0]; K2=Shifts[1]; coe=Shifts[2];
+    os.chdir(path0);
     img1=np.zeros((N1,N2,3))
     for k in range(3):
         img1[:,:,k]=np.array([k*N1*N2+np.linspace(i*N2,(i+1)*N2-1,N2).astype(int) for i in range(N1)])
@@ -916,7 +920,7 @@ def make_gif(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,Mass,Kerr,Newm
         else:
             names.append(name0+str(j)+ext)
     os.chdir(path)
-    path=os.getcwd()+"/temp"
+    path=path+"/temp"
     try:
         os.mkdir(path)
         #print(f"Directory '{path}' created successfully.")
@@ -953,6 +957,7 @@ def make_gif(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,Mass,Kerr,Newm
         img0.astype(int)
         cv.imwrite(names[i0],img0)
        
+    os.chdir(path)
     Imgs0=os.listdir(); Imgs0.sort(); Imgs=list([]); L=0;
     img=cv.imread(Imgs0[0]); N1=np.shape(img)[0]; N2=np.shape(img)[1];
     L=Ls[2] 
@@ -980,8 +985,9 @@ def make_gif(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,Mass,Kerr,Newm
     for img in Imgs0:
         os.remove(img)
     
-    os.chdir('../')
-    os.rmdir('temp')
+    path=path0+'/'+Name+'_gif';
+    os.chdir(path)
+    os.rmdir(path+"/temp")
     for img in range(len(Imgs)):
         name=names[img]; img=Imgs[img];
         img*=256
@@ -992,5 +998,3 @@ def make_gif(Nimages,Name,Image,Resol,Shifts,Direction,FPS,Lambda,Mass,Kerr,Newm
             image = imageio.imread(name)
             writer.append_data(image)
             os.remove(name)
-
-    os.chdir('../')
