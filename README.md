@@ -10,7 +10,7 @@ First, install Python 3.10 (along with the libraries numpy, scipy, matplotlib, c
 Alternatively, the package can be installed using pip, via the command "pip install knds_orbits_and_shadows"; see also https://pypi.org/project/knds-orbits-and-shadows/
 
 Next, put the content of the present folder anywhere and in the examples.py file, change the first line to match the directory of the files (and images!).
-Execute the file examples.py; it uses all the functions of the programs, so it should be a good indicator of the sanity of the package. It is divided in three parts: the first one tests the orbit and shadow display, the second one creates a file comet.gif depicting an animated orbit and the third one creates a folder figure_gif containing the file figure.gif; this represents the shadow of an RNdS black hole, with a background celestial sphere that moves diagonally. The full execution takes about one minute on a 12-core 2.60 GHz CPU with 16 Go of RAM.
+Execute the file examples.py; it uses all the functions of the programs, so it should be a good indicator of the sanity of the package. It is divided in three parts: the first one tests the orbit and shadow display, the second one creates a file comet.gif depicting an animated orbit and the third one creates a folder figure_gif containing the file figure.gif; this represents the shadow of an RNdS black hole, with a background celestial sphere that moves diagonally. The full execution takes about one minute and a half on a 12-core 2.60 GHz CPU with 16 Go of RAM.
 
 ---------------------------------------------------------------------------------------------------
 
