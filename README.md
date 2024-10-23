@@ -77,7 +77,7 @@ The other function make_gif_with_DatFile has the same synthax and output as make
 
 
 
-Although all the functions are coded to have inputs expressed in SI units, it is possible for the user to change this by resetting the values of the fundamental constants used (the gravitational constant, the velocity of light, the electric permittivity of vacuum and the Stefan-Boltzmann constant, respectively denoted in the code by 'GSI', 'cSI', 'e0' and 'sb') in the very first line of the functions orbit, shadow and shadow4gif.
+Although all the functions are coded to have inputs expressed in SI units, it is possible for the user to change this by resetting the values of the fundamental constants used (the gravitational constant, the velocity of light, the electric permittivity of vacuum and the Stefan-Boltzmann constant, respectively denoted in the code by 'GSI', 'cSI', 'e0' and 'sb') in the very first line of the functions orbit, shadow and shadow4gif, as well as at the beginning of the file auxi.py.
 
 
 
